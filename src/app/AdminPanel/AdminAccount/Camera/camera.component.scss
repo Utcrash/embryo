@@ -1,0 +1,30 @@
+.actionBtn {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.snapshot {
+    text-align: center;
+
+    img {
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
+ul.links {
+    padding-bottom: 20px;
+}
+
+.edit-profile {
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    height: 500px;
+    width: 100%;
+}
+
+.click {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}

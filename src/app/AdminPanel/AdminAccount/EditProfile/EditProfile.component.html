@@ -1,0 +1,107 @@
+<mat-card *ngIf="type == 'info'">
+   <h4> Edit Profile Information</h4>
+   <div fxLayout="row wrap" class="col-gap">
+      <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
+         <form [formGroup]="info">
+            <div class="example-container">
+               <mat-form-field class="w-100 mb-3" appearance="fill">
+                  <mat-label>Profile</mat-label>
+                  <select matNativeControl required>
+                     <option value="Merchant With KYC">Merchant with KYC</option>
+                     <option value="Merchant Without KYC">Merchant without KYC</option>
+                     <option value="Customer With KYC">Customer with KYC</option>
+                     <option value="Customer Without KYC">Customer without KYC</option>
+                  </select>
+                  <mat-error *ngIf="info.get('profile').hasError('required') && info.get('profile').touched">This field
+                     should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Name" formControlName="name">
+                  <mat-error *ngIf="info.get('name').hasError('required') && info.get('name').touched">This field should
+                     not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Contact Name" formControlName="contactName">
+                  <mat-error *ngIf="info.get('contactName').hasError('required') && info.get('contactName').touched">
+                     This field should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Account Number" formControlName="accountNumber">
+                  <mat-error
+                     *ngIf="info.get('accountNumber').hasError('required') && info.get('accountNumber').touched">This
+                     field should not be empty.</mat-error>
+               </mat-form-field>
+
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Account Name" formControlName="accountName">
+                  <mat-error *ngIf="info.get('accountName').hasError('required') && info.get('accountName').touched">
+                     This field should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="BIC" formControlName="bic">
+                  <mat-error *ngIf="info.get('bic').hasError('required') && info.get('bic').touched">This field should
+                     not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Bank Name" formControlName="bankName">
+                  <mat-error *ngIf="info.get('bankName').hasError('required') && info.get('bankName').touched">This
+                     field should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="City" formControlName="city">
+                  <mat-error *ngIf="info.get('city').hasError('required') && info.get('city').touched">This field should
+                     not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="State" formControlName="state">
+                  <mat-error *ngIf="info.get('state').hasError('required') && info.get('state').touched">This field
+                     should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Zip" formControlName="zip">
+                  <mat-error *ngIf="info.get('zip').hasError('required') && info.get('zip').touched">This field should
+                     not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput placeholder="Mobile No." formControlName="phone">
+                  <mat-error *ngIf="info.get('phone').hasError('required') && info.get('phone').touched">This field
+                     should not be empty.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput type="email" placeholder="Email" formControlName="email">
+                  <mat-error *ngIf="info.get('email').hasError('required') && info.get('email').touched">This field
+                     should not be empty.</mat-error>
+                  <mat-error *ngIf="info.get('email').hasError('pattern') && info.get('email').touched">Please enter a
+                     valid email.</mat-error>
+               </mat-form-field>
+               <mat-form-field class="w-100 mb-3">
+                  <input matInput type="kyc" placeholder="KYC Identifier" formControlName="kyc">
+                  <mat-error *ngIf="info.get('kyc').hasError('required') && info.get('kyc').touched">This field should
+                     not be empty.</mat-error>
+                  <mat-error *ngIf="info.get('kyc').hasError('pattern') && info.get('kyc').touched">Please enter a valid
+                     email.</mat-error>
+               </mat-form-field>
+               <div class="w-100 mb-3">
+                  <input matInput placeholder="Upload PAN Card">
+                  <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                  <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+                  <img [src]="imgURL" height="200" *ngIf="imgURL">
+               </div>
+               <!-- <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+               <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+               <button mat-raised-button color="accent" (click)="submitProfileInfo()">Save</button>
+            </div>
+            <!-- example-container -->
+         </form>
+      </div>
+      <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
+         <div>
+            <app-camera></app-camera>
+            <!-- <div class="snapshot" *ngIf="webcamImage">
+               <img [src]="webcamImage.imageAsDataUrl" />
+            </div> -->
+         </div>
+      </div>
+
+   </div>
+</mat-card>

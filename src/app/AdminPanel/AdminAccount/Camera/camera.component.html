@@ -1,0 +1,26 @@
+<div style="text-align:center">
+    <div>
+        <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+            *ngIf="showWebcam" [allowCameraSwitch]="false" [switchCamera]="nextWebcamObservable"
+            [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
+            (initError)="handleInitError($event)"></webcam>
+        <br />
+        <div class="click">
+            <div class="edit-profile" *ngIf="!showWebcam && !webcamImage"
+                style="background-image: url(assets/images/user-edit.png)" (click)="toggleWebcam();">
+            </div>
+            <button type="button" mat-raised-button *ngIf="showWebcam" (click)="triggerSnapshot()"
+                style="margin-top: 10px; width: 200px; border-radius: 50px">Click</button>
+        </div>
+
+        <div class="snapshot" *ngIf="webcamImage">
+            <img [src]="webcamImage" />
+            <button type="button" style="margin-top: 10px; width: 200px; border-radius: 50px" mat-raised-button
+                (click)="webcamImage = null;toggleWebcam()">Retake</button>
+        </div>
+    </div>
+</div>
+<h4 *ngIf="errors.length > 0">Messages:</h4>
+<ul *ngFor="let error of errors">
+    <li>{{error | json}}</li>
+</ul>

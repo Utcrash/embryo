@@ -1,0 +1,21 @@
+//Processor
+html body ngx-loading-bar {
+	.ngx-spinner {
+		background: #fff;
+		top: 0 !important;
+		bottom: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		.ngx-spinner-icon {
+			width: 50px !important;
+			height: 50px !important;
+			color: #283593;
+		}
+	}
+	.ngx-bar {
+		display: none !important;
+	}
+}
