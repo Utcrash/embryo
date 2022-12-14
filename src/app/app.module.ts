@@ -1,8 +1,8 @@
-import { BrowserModule} from '@angular/platform-browser';
-import { NgModule} from '@angular/core';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -73,7 +73,7 @@ import { AdminPanelModule } from './AdminPanel/admin-panel.module';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+	suppressScrollX: true
 };
 
 /********** Custom option for ngx-translate ******/
@@ -101,9 +101,9 @@ export function createTranslateLoader(http: HttpClient) {
 		FixedHeaderComponent
 	],
 	imports: [
-		BrowserModule.withServerTransition({appId: 'embryo-seo-pre'}),
+		BrowserModule.withServerTransition({ appId: 'embryo-seo-pre' }),
 		BrowserAnimationsModule,
-		RouterModule.forRoot(AppRoutes, { onSameUrlNavigation: 'reload', initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
+		RouterModule.forRoot(AppRoutes),
 		GlobalModule,
 		TemplatesModule,
 		MatButtonModule,
@@ -151,7 +151,7 @@ export function createTranslateLoader(http: HttpClient) {
 		SlickCarouselModule,
 		PerfectScrollbarModule,
 		AdminPanelModule
-  ],
+	],
 	providers: [
 		MenuItems,
 		EmbryoService,
@@ -160,7 +160,7 @@ export function createTranslateLoader(http: HttpClient) {
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
 		}
 	],
-	exports : [
+	exports: [
 		RouterModule,
 		ToastaModule
 	],

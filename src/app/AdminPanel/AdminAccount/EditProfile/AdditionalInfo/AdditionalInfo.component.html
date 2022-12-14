@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Additional Info</h2>
+
+<mat-dialog-content>
+  <div>
+    <table>
+      <tr>
+        <th>Faces</th>
+        <th>Age-Gender</th>
+        <th>Liveness Check</th>
+        <th>Document Type</th>
+        <th>Extracted Info</th>
+      </tr>
+      <tr>
+        <td> <img [src]="imgFace1"></td>
+        <td>{{data['image-1']['age-gender']}}</td>
+        <td>{{data['image-1']['liveness-check']}}</td>
+        <td>{{data['image-1']['document-type']}}</td>
+        <td>
+          <div *ngIf="checkType(info1) === 'string'">{{info1}}
+          </div>
+          <div *ngIf="checkType(info1) !== 'string'">
+            <span *ngFor="let item of info1 | keyvalue" class="capitalize d-flex flex-column">
+              {{infoFormat(item.key)}} : {{item.value}} &nbsp;
+            </span>
+          </div>
+
+        </td>
+      </tr>
+      <tr>
+        <td> <img [src]="imgFace2"></td>
+        <td>{{data['image-2']['age-gender']}}</td>
+        <td>{{data['image-2']['liveness-check']}}</td>
+        <td>{{data['image-2']['document-type']}}</td>
+        <td>
+          <div *ngIf="checkType(info2) === 'string'">{{info2}}
+          </div>
+          <div *ngIf="checkType(info2) !== 'string'">
+            <span *ngFor="let item of info2 | keyvalue" class="capitalize d-flex flex-column">
+              {{infoFormat(item.key)}} : {{item.value}} &nbsp;
+            </span>
+          </div>
+
+        </td>
+      </tr>
+    </table>
+
+    <div class="mt-3">
+      <label class="label">Similarity: </label>
+      <span class="label-data">{{data.similarity}}</span>
+    </div>
+
+    <div class="mt-3 d-flex flex-column">
+      <label class="label">Technical Details : </label>
+      <span *ngFor="let detail of data['technical-details']">
+        <span class="label-data"> {{detail}} &nbsp;</span>
+      </span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="mb-0" align="right" style="justify-content: end;">
+  <button mat-raised-button (click)="dialogRef.close()" color="primary">Close</button>
+  <!-- <button mat-raised-button (click)="yes()" color="accent">Validate and Save</button> -->
+</mat-dialog-actions>

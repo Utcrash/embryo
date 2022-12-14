@@ -1,0 +1,20 @@
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.label-data {
+    font-size: 14px;
+}
+
+.tech {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,5 +1,5 @@
 <mat-card *ngIf="type == 'info'">
-   <h4> Edit Profile Information</h4>
+   <h4 (click)="activateAdmin()"> Edit Profile Information</h4>
    <div fxLayout="row wrap" class="col-gap">
       <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
          <form [formGroup]="info">
@@ -81,6 +81,14 @@
                   <mat-error *ngIf="info.get('kyc').hasError('pattern') && info.get('kyc').touched">Please enter a valid
                      email.</mat-error>
                </mat-form-field>
+               <mat-form-field class="w-100 mb-3" appearance="fill">
+                  <mat-label>Verification Document Type</mat-label>
+                  <select matNativeControl formControlName="docType">
+                     <option value="Aadhaar">Aadhaar</option>
+                     <option value="PAN">PAN</option>
+                     <option value="Passport">Passport</option>
+                  </select>
+               </mat-form-field>
                <div class="w-100 mb-3 upload">
                   <label style="font-size: 11px;color: rgba(0, 0, 0, 0.38)" type="doc"
                      placeholder="Upload PAN Card">Upload
@@ -93,7 +101,13 @@
                </div>
                <!-- <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
                <!-- <input hidden (change)="onFileSelected()" #fileInput type="file" id="file"> -->
-               <button mat-raised-button color="accent" (click)="submitProfileInfo()">Validate and Save</button>
+               <div class="d-flex">
+                  <button *ngIf="isAdmin && validationResponse" mat-raised-button color="accent" class="mr-3 "
+                     (click)="additionalInfo()">Get Additional
+                     Info</button>
+                  <button mat-raised-button color="accent" (click)="submitProfileInfo()">Validate and Save</button>
+               </div>
+
             </div>
             <!-- example-container -->
          </form>

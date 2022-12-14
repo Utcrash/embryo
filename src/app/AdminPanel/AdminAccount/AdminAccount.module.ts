@@ -23,6 +23,8 @@ import { ProfileComponent } from './Profile/Profile.component';
 import { AdminAccountRoutes } from './AdminAccount.routing';
 import { WebcamModule } from 'ngx-webcam';
 import { CameraComponent } from './Camera/camera.component';
+import { AdditionalInfoComponent } from './EditProfile/AdditionalInfo/AdditionalInfo.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { CameraComponent } from './Camera/camera.component';
 		CollaborationComponent,
 		EditProfileComponent,
 		CameraComponent,
+		AdditionalInfoComponent
 	],
 	imports: [
 		CommonModule,
@@ -51,8 +54,10 @@ import { CameraComponent } from './Camera/camera.component';
 		MatTableModule,
 		FlexLayoutModule,
 		MatCheckboxModule,
-		WebcamModule
+		WebcamModule,
+		MatDialogModule,
 	],
+	exports: [AdditionalInfoComponent],
 	providers: [CameraComponent]
 })
 export class AdminAccountModule { }

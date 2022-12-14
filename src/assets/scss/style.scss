@@ -1,4 +1,3 @@
-
 @import 'variables';
 @import 'material-theme';
 @import "core/core";
@@ -7,3 +6,20 @@
 @import "utilities/utilities";
 @import "admin/admin";
 @import "rtl";
+
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
