@@ -81,22 +81,26 @@
                   <mat-error *ngIf="info.get('kyc').hasError('pattern') && info.get('kyc').touched">Please enter a valid
                      email.</mat-error>
                </mat-form-field>
-               <div class="w-100 mb-3">
-                  <input matInput placeholder="Upload PAN Card">
-                  <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-                  <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+               <div class="w-100 mb-3 upload">
+                  <label style="font-size: 11px;color: rgba(0, 0, 0, 0.38)" type="doc"
+                     placeholder="Upload PAN Card">Upload
+                     Verification Document</label>
+                  <button type="button" style="width: 200px; margin-bottom: 30px;" mat-raised-button
+                     (click)="fileInput.click()">Choose
+                     File</button>
+                  <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
                   <img [src]="imgURL" height="200" *ngIf="imgURL">
                </div>
                <!-- <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
-               <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-               <button mat-raised-button color="accent" (click)="submitProfileInfo()">Save</button>
+               <!-- <input hidden (change)="onFileSelected()" #fileInput type="file" id="file"> -->
+               <button mat-raised-button color="accent" (click)="submitProfileInfo()">Validate and Save</button>
             </div>
             <!-- example-container -->
          </form>
       </div>
       <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
          <div>
-            <app-camera></app-camera>
+            <app-camera (pictureTaken)="pictureTaken($event)"></app-camera>
             <!-- <div class="snapshot" *ngIf="webcamImage">
                <img [src]="webcamImage.imageAsDataUrl" />
             </div> -->

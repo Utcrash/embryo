@@ -38,6 +38,8 @@ export class EditProfileComponent implements OnInit {
    imgURL: any;
    webcamImage: WebcamImage;
    subscription: Subscription;
+   docImage: any;
+   profileImg: File;
 
    constructor(private http: HttpClient,
       private route: ActivatedRoute,
@@ -71,23 +73,6 @@ export class EditProfileComponent implements OnInit {
       });
    }
 
-
-
-   onFileSelected() {
-      const inputNode: any = document.querySelector('#file');
-
-      if (typeof (FileReader) !== 'undefined') {
-         const reader = new FileReader();
-
-         reader.onload = (e: any) => {
-
-            this.srcResult = e.target.result;
-         };
-
-         this.preview(inputNode.files)
-      }
-   }
-
    /**
     * Function is used to submit the profile info.
     * If form value is valid, redirect to profile page.
@@ -105,6 +90,90 @@ export class EditProfileComponent implements OnInit {
 
 
    submitProfileInfo() {
+      this.validateImages()
+   }
+
+
+
+   onFileSelected(event) {
+      const inputNode: any = document.querySelector('#file');
+
+      this.docImage = event.target.files[0];
+      console.log(this.docImage)
+
+      if (typeof (FileReader) !== 'undefined') {
+         const reader = new FileReader();
+
+         reader.onload = (e: any) => {
+
+            this.srcResult = e.target.result;
+         };
+
+         this.preview(inputNode.files)
+      }
+   }
+
+
+   pictureTaken(event) {
+      const arr = event.imageAsDataUrl.split(",");
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) {
+         u8arr[n] = bstr.charCodeAt(n);
+      }
+      const file: File = new File([u8arr], 'profile.jpg', { type: event.mimeType })
+      this.profileImg = file
+   }
+
+
+
+   preview(files) {
+      console.log(files)
+      if (files.length === 0)
+         return;
+
+      var mimeType = files[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+         this.message = "Only images are supported.";
+         return;
+      }
+
+      var reader = new FileReader();
+      this.imagePath = files;
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+         this.imgURL = reader.result;
+      }
+   }
+
+   validateImages() {
+      let payload: FormData = new FormData();
+      payload.append('image-1', this.docImage, this.docImage.name);
+      payload.append('image-2', this.profileImg, this.profileImg.name);
+      payload.append('img1-type', 'Aadhar');
+      payload.append('img2-type', 'Passport size photo/Selfie');
+      payload.append('predict-age-and-gender', 'no');
+      payload.append('detect-face', 'no');
+      payload.append('facial-similarity', 'yes');
+      payload.append('liveness-check', 'no');
+      payload.append('document-classification', 'no');
+      payload.append('extract-information', 'no');
+
+      this.http.post('https://demo.ml.appveen.com/verify_kyc', payload, {}).subscribe(res => {
+         console.log(res);
+         if (res['similarity'] === 'Likely Match') {
+            this.toastyService.success('Likely Match');
+            this.submitData();
+         }
+         else {
+            this.toastyService.info(res['similarity'])
+         }
+      })
+   }
+
+   submitData() {
       if (this.info.valid) {
 
 
@@ -210,27 +279,5 @@ export class EditProfileComponent implements OnInit {
    }
 
 
-   preview(files) {
-      console.log(files)
-      if (files.length === 0)
-         return;
-
-      var mimeType = files[0].type;
-      if (mimeType.match(/image\/*/) == null) {
-         this.message = "Only images are supported.";
-         return;
-      }
-
-      var reader = new FileReader();
-      this.imagePath = files;
-      reader.readAsDataURL(files[0]);
-      reader.onload = (_event) => {
-         this.imgURL = reader.result;
-      }
-   }
-
-   // handleImage(webcamImage: WebcamImage) {
-   //    this.webcamImage = webcamImage;
-   // }
 
 }
