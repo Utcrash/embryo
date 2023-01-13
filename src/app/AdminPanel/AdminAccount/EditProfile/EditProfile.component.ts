@@ -171,12 +171,12 @@ export class EditProfileComponent implements OnInit {
       payload.append('image-2', this.profileImg, this.profileImg.name);
       payload.append('img1-type', this.info.get('docType').value);
       payload.append('img2-type', 'Passport size photo/Selfie');
-      payload.append('predict-age-and-gender', this.isAdmin ? 'yes' : 'no');
-      payload.append('detect-face', this.isAdmin ? 'yes' : 'no');
+      payload.append('predict-age-and-gender', 'yes');
+      payload.append('detect-face', 'yes');
       payload.append('facial-similarity', 'yes');
-      payload.append('liveness-check', this.isAdmin ? 'yes' : 'no');
-      payload.append('document-classification', this.isAdmin ? 'yes' : 'no');
-      payload.append('extract-information', this.isAdmin ? 'yes' : 'no');
+      payload.append('liveness-check', 'yes');
+      payload.append('document-classification', 'yes');
+      payload.append('extract-information', 'yes');
 
       this.http.post('https://demo.ml.appveen.com/verify_kyc', payload, {}).subscribe(res => {
 

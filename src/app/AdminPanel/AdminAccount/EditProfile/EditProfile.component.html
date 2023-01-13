@@ -102,10 +102,15 @@
                <!-- <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
                <!-- <input hidden (change)="onFileSelected()" #fileInput type="file" id="file"> -->
                <div class="d-flex">
-                  <button *ngIf="isAdmin && validationResponse" mat-raised-button color="accent" class="mr-3 "
+                  <button mat-raised-button color="accent" class="mr-3" (click)="submitProfileInfo()">Validate and
+                     Save</button>
+
+                  <button *ngIf="validationResponse" mat-raised-button color="accent" class="mr-3 "
                      (click)="additionalInfo()">Get Additional
                      Info</button>
-                  <button mat-raised-button color="accent" (click)="submitProfileInfo()">Validate and Save</button>
+
+                  <button mat-raised-button color="accent" *ngIf="validationResponse"
+                     (click)="submitData()">Submit</button>
                </div>
 
             </div>
